@@ -37,8 +37,6 @@ A complete **Student Management System** built with **Node.js**, **Express.js**,
 
 # 📁 Project Structure
 
-# 📁 Project Structure
-
 ```text
 student-management-system/
 │
