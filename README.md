@@ -37,23 +37,26 @@ A complete **Student Management System** built with **Node.js**, **Express.js**,
 
 # 📁 Project Structure
 
+# 📁 Project Structure
+
 ```text
 student-management-system/
 │
 ├── public/
-│   ├── css/
-│   ├── images/
-│   └── js/
+│   ├── delete.css
+│   ├── edit.css
+│   ├── style.css
+│   └── view.css
 │
 ├── views/
-│   ├── partials/
-│   ├── index.ejs
-│   ├── add.ejs
-│   ├── show.ejs
+│   ├── delete.ejs
 │   ├── edit.ejs
-│   └── delete.ejs
+│   ├── index.ejs
+│   ├── new.ejs
+│   └── view.ejs
 │
-├── app.js
+├── .gitignore
+├── index.js
 ├── package.json
 ├── package-lock.json
 └── README.md
