@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Details</title>
+    <link rel="stylesheet" href="/view.css">
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Student Details</h1>
+
+    <div class="student-card">
+
+        <div class="student-header">
+
+            <div class="student-image">
+                <i class="fa-solid fa-user"></i>
+            </div>
+
+            <div class="student-name">
+                <h2><%= student.fullName %></h2>
+            </div>
+
+        </div>
+
+        <hr>
+
+        <div class="student-info">
+
+            <div class="info">
+                <span>Roll No</span>
+                <p><%= student.rollNumber %></p>
+            </div>
+
+            <div class="info">
+                <span>Age</span>
+                <p><%= student.age %></p>
+            </div>
+
+            <div class="info">
+                <span>Gender</span>
+                <p><%= student.gender %></p>
+            </div>
+
+            <div class="info">
+                <span>Course</span>
+                <p><%= student.course %></p>
+            </div>
+
+            <div class="info">
+                <span>Email</span>
+                <p><%= student.email %></p>
+            </div>
+
+            <div class="info">
+                <span>Phone</span>
+                <p>+91 <%= student.phone %></p>
+            </div>
+
+            <div class="info">
+                <span>City</span>
+                <p><%= student.city %></p>
+            </div>
+
+            <div class="info">
+                <span>Address</span>
+                <p><%= student.address %></p>
+            </div>
+
+            <div class="info">
+                <span>Admission Date</span>
+                <p>12 July 2026</p>
+            </div>
+
+            <div class="info">
+                <span>Status</span>
+                <p><%= student.status %></p>
+            </div>
+
+        </div>
+
+        <div class="buttons">
+
+            <a href="http://localhost:3000/students" class="back-btn">
+                <i class="fa-solid fa-arrow-left"></i>
+                Back
+            </a>
+
+            <a href="http://localhost:3000/students/<%= student.id %>/edit" class="edit-btn">
+                <i class="fa-solid fa-pen"></i>
+                Edit Student
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

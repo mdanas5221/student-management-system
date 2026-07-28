@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Student Management System</title>
+
+  <!-- LINK CSS FILES -->
+  <link rel="stylesheet" href="/style.css" />
+
+  <!-- FONT AWSOME CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+</head>
+
+<body>
+  <!-- ==========================
+            Navbar
+    =========================== -->
+
+  <nav>
+    <div class="logo">
+      <i class="fa-solid fa-graduation-cap"></i>
+
+      <h2>Student Management</h2>
+    </div>
+
+
+    <a href="http://localhost:3000/students/new" class="add-btn"><i class="fa-solid fa-plus"></i> Add Student</a>
+
+  </nav>
+
+  <!-- ==========================
+            Main Container
+    =========================== -->
+
+  <main class="container">
+    <!-- Heading -->
+
+    <div class="heading">
+      <div>
+        <h1>All Students</h1>
+
+        <p>Total Students : <%= students.length %></p>
+      </div>
+    </div>
+
+    <!-- Search -->
+
+    <div>
+      <form action="/students" method="get" class="search-form">
+        <input type="search" placeholder="Search student by name..." name="search"/>
+
+        <button><i class="fa-solid fa-magnifying-glass"></i>Search</button>
+      </form>
+    </div>
+
+    <!-- Table -->
+
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Roll No</th>
+
+            <th>Name</th>
+
+            <th>Age</th>
+
+            <th>Course</th>
+
+            <th>City</th>
+
+            <th>Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% for( let student of students ) { %>
+          <tr>
+            <td><%= student.rollNumber %></td>
+
+            <td><%= student.fullName %></td>
+
+            <td><%= student.age %></td>
+
+            <td><%= student.course %></td>
+
+            <td><%= student.city %></td>
+            <td>
+              <div class="actions">
+                <a href="http://localhost:3000/students/<%= student.id %>" class="view-btn"><i class="fa-solid fa-eye"></i> View</a>
+
+                <a href="http://localhost:3000/students/<%= student.id %>/edit" class="edit-btn"><i class="fa-solid fa-pen"></i> Edit</a>
+
+                <a href="http://localhost:3000/students/<%= student.id %>/delete" class="delete-btn"><i class="fa-solid fa-trash"></i> Delete</a>
+              </div>
+            </td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</body>
+
+</html>

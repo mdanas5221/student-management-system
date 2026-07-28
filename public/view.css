@@ -1,0 +1,153 @@
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Inter",sans-serif;
+}
+
+body{
+    background:#F8FAFC;
+    color:#111827;
+}
+
+.container{
+    width:90%;
+    max-width:900px;
+    margin:20px auto;
+}
+
+.container h1{
+    margin-bottom:25px;
+    font-size:2rem;
+}
+
+.student-card{
+    background:#fff;
+    border:1px solid #E5E7EB;
+    border-radius:16px;
+    padding:25px;
+    box-shadow:0 5px 15px rgba(0,0,0,.05);
+}
+
+.student-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.student-image{
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    background:#EFF6FF;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:1.5rem;
+    color:#2563EB;
+}
+
+.student-name{
+    flex:1;
+    margin-left:20px;
+}
+
+.student-name h2{
+    font-size:1.2rem;
+}
+
+hr{
+    margin:20px 0;
+    border:none;
+    border-top:1px solid #E5E7EB;
+}
+
+.student-info{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:22px;
+}
+
+.info{
+    background:#F9FAFB;
+    border:1px solid #E5E7EB;
+    border-radius:10px;
+    padding:10px 15px;
+}
+
+.info span{
+    display:block;
+    color:#6B7280;
+    font-size:.9rem;
+    margin-bottom:5px;
+}
+
+.info p{
+    font-weight:600;
+    color:#111827;
+}
+
+.buttons{
+    display:flex;
+    justify-content:flex-end;
+    gap:15px;
+    margin-top:25px;
+}
+
+.buttons a{
+    text-decoration:none;
+    padding:12px 22px;
+    border-radius:8px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.back-btn{
+    background:#E5E7EB;
+    color:#111827;
+}
+
+.back-btn:hover{
+    background:#D1D5DB;
+}
+
+.edit-btn{
+    background:#2563EB;
+    color:white;
+}
+
+.edit-btn:hover{
+    background:#1D4ED8;
+}
+
+/* Responsive */
+
+@media(max-width:768px){
+
+.student-header{
+    flex-direction:column;
+    text-align:center;
+}
+
+.student-name{
+    margin-left:0;
+    margin-top:20px;
+}
+
+.student-info{
+    grid-template-columns:1fr;
+}
+
+.buttons{
+    flex-direction:column;
+}
+
+.buttons a{
+    width:100%;
+    text-align:center;
+}
+
+}
