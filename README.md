@@ -1,58 +1,75 @@
+![Node.js](https://img.shields.io/badge/Node.js-22.x-green)
+![Express.js](https://img.shields.io/badge/Express.js-Backend-black)
+![MySQL](https://img.shields.io/badge/MySQL-Database-blue)
+![License](https://img.shields.io/badge/Status-Learning-success)
+
 # 🎓 Student Management System
 
-A complete **Student Management System** built with **Node.js**, **Express.js**, **EJS**, **UUID**, and **Method Override**. This project demonstrates the fundamentals of **REST APIs**, **CRUD Operations**, **Search Functionality**, and **Server-Side Rendering** using Express.
+**Version:** v2.0.0
+
+A full-stack **Student Management System** built with **Node.js, Express.js, MySQL, EJS, UUID, and Method Override**. This project demonstrates the fundamentals of **REST APIs, CRUD Operations, MySQL Integration, Search Functionality, and Server-Side Rendering** using Express.
 
 ---
 
-# 🚀 Features
+## 🚀 Features
 
 - ➕ Add New Student
 - 📋 View All Students
 - 👀 View Student Details
 - ✏️ Edit Student Information
 - 🗑️ Delete Student
-- 🔍 Search Students by Name
-- 🆔 Unique Student IDs using UUID
-- 📱 Fully Responsive User Interface
-- ✅ Client-side Form Validation
+- 🔍 Search Students by Name, Roll Number & Email
+- 🆔 UUID-based Student IDs
+- 🗄️ MySQL Database Integration
+- 🌱 Database Seeding using Faker.js
+- 📄 SQL Schema Included
+- 🔐 Environment Variables (.env)
 - 🌐 RESTful Routing
-- 📄 Dynamic Routes using Route Parameters
-- 🖥️ Server-Side Rendering with EJS
 - 🔄 Method Override for PATCH & DELETE Requests
+- 🖥️ Server-Side Rendering with EJS
+- 📱 Responsive User Interface
 
 ---
 
-# 🛠️ Tech Stack
+## 🛠️ Tech Stack
 
 - Node.js
 - Express.js
+- MySQL
+- mysql2
 - EJS
 - UUID
 - Method Override
+- Dotenv
 - HTML5
 - CSS3
 - JavaScript
 
 ---
 
-# 📁 Project Structure
+## 📁 Project Structure
 
 ```text
 student-management-system/
 │
 ├── public/
-│   ├── delete.css
-│   ├── edit.css
 │   ├── style.css
-│   └── view.css
+│   ├── view.css
+│   ├── edit.css
+│   └── delete.css
 │
 ├── views/
-│   ├── delete.ejs
-│   ├── edit.ejs
 │   ├── index.ejs
+│   ├── view.ejs
 │   ├── new.ejs
-│   └── view.ejs
+│   ├── edit.ejs
+│   └── delete.ejs
 │
+├── server/
+│   ├── schema.sql
+│   └── seed.js
+│
+├── .env
 ├── .gitignore
 ├── index.js
 ├── package.json
@@ -60,82 +77,129 @@ student-management-system/
 └── README.md
 ```
 
----
-
-# 📌 REST API Routes
+## 📌 REST API Routes
 
 | Method | Route | Description |
 |--------|-------|-------------|
-| GET | /students | Display all students |
-| GET | /students/new | Add New Student Form |
-| POST | /students | Add a new student |
-| GET | /students/:id | View student details |
-| GET | /students/:id/edit | Show Edit Student Form |
-| PATCH | /students/:id | Update student information |
-| GET | /students/:id/delete | Show Delete Confirmation Page |
-| DELETE | /students/:id | Delete a student |
+| GET | /student | Display all students |
+| GET | /student/new | Show Add Student Form |
+| POST | /student | Add New Student |
+| GET | /student/:id | View Student Details |
+| GET | /student/:id/edit | Show Edit Student Form |
+| PATCH | /student/:id | Update Student |
+| GET | /student/:id/delete | Show Delete Confirmation |
+| DELETE | /student/:id | Delete Student |
 
 ---
 
-# 🔍 Search Functionality
+## 🔍 Search Functionality
 
-Users can search students by name.
+Search students by:
+
+- Name
+- Roll Number
+- Email
 
 Example:
 
-```text
-/students?search=Anas
+```
+/student?search=Anas
 ```
 
-The application filters matching students and displays the search results instantly.
+The application filters matching students and displays the search results.
 
 ---
 
-# ⚙️ Installation
+## 🔐 Environment Variables
 
-### Clone the repository
+Create a **.env** file in the project root.
+
+```env
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=your_password
+DB_NAME=student_management
+PORT=3000
+```
+
+---
+
+## ⚙️ Installation
+
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/mdanas5221/student-management-system.git
 ```
 
-### Navigate to the project folder
+### 2. Navigate to the project folder
 
 ```bash
 cd student-management-system
 ```
 
-### Install dependencies
+### 3. Install dependencies
 
 ```bash
 npm install
 ```
 
-### Start the server
+### 4. Create a .env file
+
+```env
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=your_password
+DB_NAME=student_management
+PORT=3000
+```
+
+### 5. Create the database
+
+```sql
+CREATE DATABASE student_management;
+```
+
+### 6. Run the schema file
 
 ```bash
-node app.js
+source schema.sql
+```
+
+### 7. (Optional) Seed the database
+
+```bash
+node seed.js
+```
+
+### 8. Start the server
+
+```bash
+node index.js
 ```
 
 or
 
 ```bash
-nodemon app.js
+nodemon index.js
 ```
 
-### Open your browser
+### 9. Open your browser
 
-```text
-http://localhost:3000/students
+```
+http://localhost:3000/student
 ```
 
 ---
 
-# 📚 What I Learned
+## 📚 What I Learned
 
 - Express.js Routing
 - CRUD Operations
 - REST API Principles
+- MySQL Integration
+- SQL Queries
+- Placeholder Queries
 - Route Parameters (`req.params`)
 - Query Parameters (`req.query`)
 - Express Middleware
@@ -144,31 +208,42 @@ http://localhost:3000/students
 - Search Functionality
 - UUID
 - Method Override
+- Environment Variables (.env)
+- Database Seeding
 - Server-Side Rendering
 - Dynamic Routing
-- Client-side Validation
 
 ---
 
-# 🎯 Future Improvements
+## 🎯 Future Improvements
 
-- MongoDB Integration
-- Mongoose
-- Auto Generated Roll Numbers
-- Student Profile Image Upload
-- Authentication & Authorization
-- Sorting & Filtering
-- Pagination
-- Dashboard & Analytics
-- Flash Messages
-- Better Error Handling
+- 🔍 Live Search (Without Page Reload)
+- 🔐 Authentication & Authorization
+- 👤 Student Profile Image Upload
+- 📊 Dashboard & Analytics
+- 📄 Pagination
+- ↕️ Sorting & Filtering
+- 💬 Flash Messages
+- ⚠️ Better Error Handling
+- 📤 Export Data (CSV / PDF)
+- 👥 Role-Based Access Control
 
 ---
 
-# 👨‍💻 Author
+## 📷 Screenshots
+
+> Screenshots will be added soon.
+
+---
+
+## 👨‍💻 Author
 
 **Md Anas**
 
+GitHub: https://github.com/mdanas5221
+
 ---
 
-⭐ If you found this project helpful, consider giving it a star.
+## ⭐ Support
+
+If you found this project helpful, consider giving it a ⭐ on GitHub.
