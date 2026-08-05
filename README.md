@@ -21,7 +21,6 @@ A full-stack **Student Management System** built with **Node.js, Express.js, MyS
 - 🔍 Search Students by Name, Roll Number & Email
 - 🆔 UUID-based Student IDs
 - 🗄️ MySQL Database Integration
-- 🌱 Database Seeding using Faker.js
 - 📄 SQL Schema Included
 - 🔐 Environment Variables (.env)
 - 🌐 RESTful Routing
