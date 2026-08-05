@@ -231,7 +231,25 @@ http://localhost:3000/student
 
 ## 📷 Screenshots
 
-> Screenshots will be added soon.
+### 🏠 Home
+
+![Home](screenshots/home.png)
+
+### 👥 Student List
+
+![Student List](screenshots/view-student.png)
+
+### ➕ Add Student
+
+![Add Student](screenshots/add-student.png)
+
+### ✏️ Edit Student
+
+![Edit Student](screenshots/edit-student.png)
+
+### 🗑️ Delete Student
+
+![Delete Student](screenshots/delete-student.png)
 
 ---
 
