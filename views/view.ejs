@@ -24,7 +24,7 @@
             </div>
 
             <div class="student-name">
-                <h2><%= student.fullName %></h2>
+                <h2><%= student.name %></h2>
             </div>
 
         </div>
@@ -35,7 +35,7 @@
 
             <div class="info">
                 <span>Roll No</span>
-                <p><%= student.rollNumber %></p>
+                <p><%= student.roll_no %></p>
             </div>
 
             <div class="info">
@@ -87,12 +87,12 @@
 
         <div class="buttons">
 
-            <a href="http://localhost:3000/students" class="back-btn">
+            <a href="http://localhost:3000/student" class="back-btn">
                 <i class="fa-solid fa-arrow-left"></i>
                 Back
             </a>
 
-            <a href="http://localhost:3000/students/<%= student.id %>/edit" class="edit-btn">
+            <a href="http://localhost:3000/student/<%= student.id %>/edit" class="edit-btn">
                 <i class="fa-solid fa-pen"></i>
                 Edit Student
             </a>

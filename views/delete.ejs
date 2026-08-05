@@ -38,7 +38,7 @@
 
         <span>Name</span>
 
-        <h3><%= student.fullName %></h3>
+        <h3><%= student.name %></h3>
 
       </div>
 
@@ -46,7 +46,7 @@
 
         <span>Roll Number</span>
 
-        <h3><%= student.rollNumber %></h3>
+        <h3><%= student.roll_no %></h3>
 
       </div>
 
@@ -80,9 +80,9 @@
 
     <div class="delete-buttons">
 
-      <a href="http://localhost:3000/students" class="cancel-btn">Cancel</a>
+      <a href="http://localhost:3000/student" class="cancel-btn">Cancel</a>
 
-      <form action="/students/<%= student.id %>?_method=DELETE" method="post">
+      <form action="/student/<%= student.id %>?_method=DELETE" method="post">
         <button class="delete-btn">Delete Student</button>
       </form>
     </div>

@@ -26,8 +26,9 @@
       <h2>Student Management</h2>
     </div>
 
+     <a href="http://localhost:3000/student" class="add-btn">Show All Students</a>
 
-    <a href="http://localhost:3000/students/new" class="add-btn"><i class="fa-solid fa-plus"></i> Add Student</a>
+    <a href="http://localhost:3000/student/new" class="add-btn"><i class="fa-solid fa-plus"></i> Add Student</a>
 
   </nav>
 
@@ -49,8 +50,8 @@
     <!-- Search -->
 
     <div>
-      <form action="/students" method="get" class="search-form">
-        <input type="search" placeholder="Search student by name..." name="search"/>
+      <form action="/student" method="get" class="search-form">
+        <input type="search" placeholder="Search student by name, roll no or email..." name="search"/>
 
         <button><i class="fa-solid fa-magnifying-glass"></i>Search</button>
       </form>
@@ -79,9 +80,9 @@
         <tbody>
           <% for( let student of students ) { %>
           <tr>
-            <td><%= student.rollNumber %></td>
+            <td><%= student.roll_no %></td>
 
-            <td><%= student.fullName %></td>
+            <td><%= student.name %></td>
 
             <td><%= student.age %></td>
 
@@ -90,11 +91,11 @@
             <td><%= student.city %></td>
             <td>
               <div class="actions">
-                <a href="http://localhost:3000/students/<%= student.id %>" class="view-btn"><i class="fa-solid fa-eye"></i> View</a>
+                <a href="http://localhost:3000/student/<%= student.id %>" class="view-btn"><i class="fa-solid fa-eye"></i> View</a>
 
-                <a href="http://localhost:3000/students/<%= student.id %>/edit" class="edit-btn"><i class="fa-solid fa-pen"></i> Edit</a>
+                <a href="http://localhost:3000/student/<%= student.id %>/edit" class="edit-btn"><i class="fa-solid fa-pen"></i> Edit</a>
 
-                <a href="http://localhost:3000/students/<%= student.id %>/delete" class="delete-btn"><i class="fa-solid fa-trash"></i> Delete</a>
+                <a href="http://localhost:3000/student/<%= student.id %>/delete" class="delete-btn"><i class="fa-solid fa-trash"></i> Delete</a>
               </div>
             </td>
           </tr>

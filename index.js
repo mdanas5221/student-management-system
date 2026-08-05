@@ -1,8 +1,10 @@
-const port = 3000;
+require("dotenv").config();
+const port = process.env.PORT || 3000;
 const express = require("express");
 const app = express();
 const path = require("path");
 const methodOverride = require("method-override");
+const mysql = require("mysql2");
 const { v4: uuidv4 } = require("uuid");
 
 app.use(express.static(path.join(__dirname, "public")));
@@ -12,201 +14,173 @@ app.use(methodOverride("_method"));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-// STUDENTS FAKE DATA
-let students = [
-  {
-    id: uuidv4(),
-    fullName: "MD Anas",
-    age: 20,
-    gender: "Male",
-    rollNumber: "STU-001",
-    course: "BCA",
-    email: "anas.raza@example.com",
-    phone: "9876543210",
-    city: "Delhi",
-    address: "Sultanpuri, New Delhi",
-    status: "Active",
-  },
-  {
-    id: uuidv4(),
-    fullName: "Aman Sharma",
-    age: 19,
-    gender: "Male",
-    rollNumber: "STU-002",
-    course: "B.Com",
-    email: "aman.sharma@example.com",
-    phone: "9812345678",
-    city: "Jaipur",
-    address: "Vaishali Nagar, Jaipur",
-    status: "Active",
-  },
-  {
-    id: uuidv4(),
-    fullName: "Priya Verma",
-    age: 21,
-    gender: "Female",
-    rollNumber: "STU-003",
-    course: "B.Sc",
-    email: "priya.verma@example.com",
-    phone: "9898765432",
-    city: "Lucknow",
-    address: "Aliganj, Lucknow",
-    status: "Inactive",
-  },
-  {
-    id: uuidv4(),
-    fullName: "Mohammed Faizan",
-    age: 22,
-    gender: "Male",
-    rollNumber: "STU-004",
-    course: "BA",
-    email: "faizan@example.com",
-    phone: "9123456780",
-    city: "Bhopal",
-    address: "MP Nagar, Bhopal",
-    status: "Active",
-  },
-  {
-    id: uuidv4(),
-    fullName: "Neha Singh",
-    age: 20,
-    gender: "Female",
-    rollNumber: "STU-005",
-    course: "BBA",
-    email: "neha.singh@example.com",
-    phone: "9988776655",
-    city: "Kanpur",
-    address: "Civil Lines, Kanpur",
-    status: "Active",
-  },
-  {
-    id: uuidv4(),
-    fullName: "Rohan Gupta",
-    age: 21,
-    gender: "Male",
-    rollNumber: "STU-006",
-    course: "B.Tech",
-    email: "rohan.gupta@example.com",
-    phone: "9765432109",
-    city: "Noida",
-    address: "Sector 62, Noida",
-    status: "Inactive",
-  },
-  {
-    id: uuidv4(),
-    fullName: "Ayesha Khan",
-    age: 19,
-    gender: "Female",
-    rollNumber: "STU-007",
-    course: "BCA",
-    email: "ayesha@example.com",
-    phone: "9871203456",
-    city: "Hyderabad",
-    address: "Charminar, Hyderabad",
-    status: "Active",
-  },
-  {
-    id: uuidv4(),
-    fullName: "Arjun Mehta",
-    age: 22,
-    gender: "Male",
-    rollNumber: "STU-008",
-    course: "MBA",
-    email: "arjun.mehta@example.com",
-    phone: "9871112233",
-    city: "Pune",
-    address: "Shivaji Nagar, Pune",
-    status: "Active",
-  },
-  {
-    id: uuidv4(),
-    fullName: "Sana Parveen",
-    age: 20,
-    gender: "Female",
-    rollNumber: "STU-009",
-    course: "B.Sc",
-    email: "sana@example.com",
-    phone: "9811112233",
-    city: "Patna",
-    address: "Kankarbagh, Patna",
-    status: "Active",
-  },
-  {
-    id: uuidv4(),
-    fullName: "Rahul Yadav",
-    age: 21,
-    gender: "Male",
-    rollNumber: "STU-010",
-    course: "B.Com",
-    email: "rahul@example.com",
-    phone: "9877776655",
-    city: "Indore",
-    address: "Vijay Nagar, Indore",
-    status: "Inactive",
-  },
-];
+const connection = mysql.createConnection({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+});
 
 // INDEX ROUTE
-app.get("/students", (req, res) => {
-  let search = req.query.search;
-  let filteredStudents = students;
+app.get("/student", (req, res) => {
+  let { search } = req.query;
+  let q;
+  let values = [];
 
-  if (search) {
-    filteredStudents = students.filter((student) => {
-      return student.fullName.toLowerCase().includes(search.toLowerCase());
-    });
+  if (!search || search.trim === "") {
+    q = "SELECT * FROM student";
+  } else {
+    q =
+      "SELECT * FROM student WHERE name LIKE ? OR roll_no LIKE ? OR email LIKE ?";
+    let keyword = `%${search}%`;
+    values = [keyword, keyword, keyword];
   }
 
-  res.render("index", { students: filteredStudents });
+  connection.query(q, values, (err, result) => {
+    if (err) {
+      console.log(err);
+      return res.send("There is some issue to fetch data, try again later.");
+    }
+    if (result.length == 0) {
+      res.send("No student found.");
+    } else {
+      res.render("index.ejs", { students: result });
+    }
+  });
 });
 
 // ADD ROUTE
-app.get("/students/new", (req, res) => {
+app.get("/student/new", (req, res) => {
   res.render("new");
 });
 
-app.post("/students", (req, res) => {
-  let student = req.body;
-  student.id = uuidv4();
-  students.push(student);
-  res.redirect("/students");
+app.post("/student", (req, res) => {
+  let {
+    name,
+    age,
+    gender,
+    roll_no,
+    course,
+    email,
+    phone,
+    city,
+    address,
+    status,
+  } = req.body;
+
+  let q = "INSERT INTO student VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+  connection.query(
+    q,
+    [
+      uuidv4(),
+      name,
+      age,
+      gender,
+      roll_no,
+      course,
+      email,
+      phone,
+      city,
+      address,
+      status,
+    ],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+        return res.send("There is some issue to add student, try again later.");
+      }
+      res.redirect("/student");
+    },
+  );
 });
 
 // VIEW ROUTE
-app.get("/students/:id", (req, res) => {
+app.get("/student/:id", (req, res) => {
   let { id } = req.params;
-  let student = students.find((stu) => stu.id === id);
-  res.render("view", { student });
+  let q = "SELECT * FROM student WHERE id = ?";
+  connection.query(q, id, (err, result) => {
+    if (err) {
+      return res.send("There is some issue to fetch data, try again later.");
+    }
+    res.render("view", { student: result[0] });
+  });
 });
 
 // EDIT ROUTE
-app.get("/students/:id/edit", (req, res) => {
+app.get("/student/:id/edit", (req, res) => {
   let { id } = req.params;
-  let student = students.find((stu) => stu.id === id);
-  res.render("edit", { student });
+  let q = "SELECT * FROM student WHERE id = ?";
+  connection.query(q, [id], (err, result) => {
+    if (err) {
+      return res.send("There is some issue to fetch data, try again later.");
+    }
+    res.render("edit", { student: result[0] });
+  });
 });
 
-app.patch("/students/:id", (req, res) => {
+app.patch("/student/:id", (req, res) => {
   let { id } = req.params;
-  const index = students.findIndex((student) => student.id === id);
-  students[index] = {
-    id: id,
-    ...req.body,
-  };
-  res.redirect("/students");
+  let {
+    name,
+    age,
+    gender,
+    roll_no,
+    course,
+    email,
+    phone,
+    city,
+    address,
+    status,
+  } = req.body;
+
+  let q =
+    "UPDATE student SET name = ?, age = ?, gender = ?, roll_no = ?, course = ?, email = ?, phone = ?, city = ?, address = ?, status = ? WHERE id = ?";
+  connection.query(
+    q,
+    [
+      name,
+      age,
+      gender,
+      roll_no,
+      course,
+      email,
+      phone,
+      city,
+      address,
+      status,
+      id,
+    ],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+        return res.send("There is some issue to fetch data, try again later.");
+      }
+      res.redirect("/student");
+    },
+  );
 });
 
 // DELETE ROUTE
-app.get("/students/:id/delete", (req, res) => {
+app.get("/student/:id/delete", (req, res) => {
   let { id } = req.params;
-  let student = students.find((stu) => stu.id === id);
-  res.render("delete", { student });
+  let q = "SELECT * FROM student WHERE id = ?";
+  connection.query(q, [id], (err, result) => {
+    if (err) {
+      return res.send("There is some error");
+    }
+    res.render("delete", { student: result[0] });
+  });
 });
 
-app.delete("/students/:id", (req, res) => {
+app.delete("/student/:id", (req, res) => {
   let { id } = req.params;
-  students = students.filter((stu) => stu.id !== id);
-  res.redirect("/students");
+  let q = "DELETE FROM student WHERE id = ?";
+  connection.query(q, [id], (err, result) => {
+    if (err) {
+      return res.send("There is some error.");
+    }
+    res.redirect("/student");
+  });
 });
 
 // LISTENING PORT

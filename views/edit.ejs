@@ -18,11 +18,11 @@
       <p>Update student information below.</p>
     </div>
 
-    <form method="post" action="/students/<%= student.id %>?_method=PATCH">
+    <form method="post" action="/student/<%= student.id %>?_method=PATCH">
       <div class="form-grid">
         <div class="input-box">
           <label>Full Name</label>
-          <input type="text" value="<%= student.fullName %>" name="fullName"/>
+          <input type="text" value="<%= student.name %>" name="name"/>
         </div>
 
         <div class="input-box">
@@ -47,7 +47,7 @@
 
         <div class="input-box">
           <label>Roll Number</label>
-          <input type="text" value="<%= student.rollNumber %>" name="rollNumber"/>
+          <input type="text" value="<%= student.roll_no %>" name="roll_no"/>
         </div>
 
         <div class="input-box">
@@ -83,7 +83,7 @@
 
 
       <div class="form-buttons">
-        <a href="http://localhost:3000/students" class="back-btn">Cancel</a>
+        <a href="http://localhost:3000/student" class="back-btn">Cancel</a>
         <button class="save-btn">Save Changes</button>
       </div>
     </form>

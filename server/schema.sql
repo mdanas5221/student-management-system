@@ -1,0 +1,13 @@
+CREATE TABLE student (
+    id VARCHAR(50) PRIMARY KEY,
+    name VARCHAR(30) NOT NULL,
+    age INT,
+    gender VARCHAR(10) DEFAULT "Other",
+    roll_no VARCHAR(15) UNIQUE NOT NULL,
+    course VARCHAR(50) NOT NULL,
+    email VARCHAR(50) UNIQUE NOT NULL,
+    phone VARCHAR(15) UNIQUE NOT NULL,
+    city VARCHAR(20) NOT NULL,
+    address VARCHAR(50) NOT NULL,
+    status VARCHAR(10) NOT NULL
+);
